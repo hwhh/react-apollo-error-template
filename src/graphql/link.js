@@ -2,7 +2,7 @@ import { graphql, print } from "graphql";
 import { ApolloLink, Observable } from "@apollo/client";
 import { schema } from "./schema";
 
-function delay(ms) {
+export function delay(ms) {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve();
