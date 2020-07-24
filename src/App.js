@@ -27,11 +27,17 @@ export default function App() {
 
     const client = useApolloClient();
 
+
+    /**
+     * HERE
+     * objectID 1 should be mered i.e. the result should contain someOtherVal: 'hello'
+     * all objects should be normalised
+     */
     const result = {
         hits: [
-            {objectID: 1, name: 'John Smith', _highlightResult: {}},
-            {objectID: 4, name: 'Sara Smith', _highlightResult: {}},
-            {objectID: 9, name: 'Budd Deey', _highlightResult: {}},
+            {objectID: 1, name: 'John Smith' , _highlightResult: {}, someOtherVal: 'hello'},
+            {objectID: 4, name: 'Bilbo Baggins', _highlightResult: {}, someOtherVal: 'world'},
+            {objectID: 9, name: 'John Doe', _highlightResult: {}, someOtherVal: 'foo'},
         ]
     }
 
@@ -43,7 +49,7 @@ export default function App() {
                 const copy = JSON.parse(JSON.stringify(val));
                 delete copy._highlightResult;
                 delete copy.objectID;
-                return {...copy, _id: val.objectID, __typename: "User"};
+                return {...copy, _id: val.objectID.toString(), __typename: "Person"};
             }),
         },
     });
